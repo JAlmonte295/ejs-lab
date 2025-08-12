@@ -60,5 +60,16 @@ app.get('/menu', (req, res) => {
     res.render('menu.ejs', { menu: RESTAURANT.menu });
 });
 
+app.get('/menu/:category', (req,res) => {
+    const category = req.params.category;
+    // Filter menu items based on the category
+    const menuItems = RESTAURANT.menu.filter(item => item.category === category);
+    // Capitalize the first letter
+    const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+
+    res.render('category.ejs', { menuItems: menuItems, category: capitalizedCategory });
+});
+
+
 app.listen(3000);
 console.log('Listening on port 3000');
