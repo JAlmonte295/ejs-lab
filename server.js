@@ -65,11 +65,10 @@ app.get('/menu/:category', (req,res) => {
     // Filter menu items based on the category
     const menuItems = RESTAURANT.menu.filter(item => item.category === category);
     // Capitalize the first letter
-    const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+    const name = category.charAt(0).toUpperCase() + category.slice(1);
 
-    res.render('category.ejs', { menuItems: menuItems, category: capitalizedCategory });
+    res.render('category.ejs', { menuItems: menuItems, category: name });
 });
-
 
 app.listen(3000);
 console.log('Listening on port 3000');
