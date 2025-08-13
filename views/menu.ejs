@@ -9,47 +9,46 @@
 <body>
   <h1>Full Menu</h1>
     <h2>Mains</h2>
-
-    <% menu.forEach(function(item) { %>
-            <ul>
+    <ul>
+        <% menu.forEach(function(item) { %>
         <% if (item.category === 'mains') { %>
             <li>
-                    <h3><%= item.name %></h3>
+                    <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
                     <p><strong>Price:</strong> $<%= item.price %></p>
                     <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
                     <p><strong>Details:</strong> <%= item.details %></p>
-            </li>
+            </li> 
         <% } %>
-            </ul>
-    <% }); %>
+        <% }); %>
+    </ul>
 
     <h2>Desserts</h2>
-    <% menu.forEach(function(item) { %>
-            <ul>
+    <ul>
+        <% menu.forEach(function(item) { %>
         <% if (item.category === 'desserts') { %>
             <li>
-                    <h3><%= item.name %></h3>
+                    <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
                     <p><strong>Price:</strong> $<%= item.price %></p>
                     <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
                     <p><strong>Details:</strong> <%= item.details %></p>
             </li>
         <% } %>
-            </ul>
-    <% }); %>
+        <% }); %>
+    </ul>
+
     <h2>Sides</h2>
-    <% menu.forEach(function(item) { %>
-            <ul>
+    <ul>
+        <% menu.forEach(function(item) { %>
         <% if (item.category === 'sides') { %>
             <li>
-                    <h3><%= item.name %></h3>
+                    <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
                     <p><strong>Price:</strong> $<%= item.price %></p>
                     <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
                     <p><strong>Details:</strong> <%= item.details %></p>
             </li>
         <% } %>
-            </ul>
-    <% }); %>
-
+        <% }); %>
+    </ul>
 
 </body>
 </html>

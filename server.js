@@ -66,6 +66,7 @@ app.get('/menu/:category', (req,res) => {
     const menuItems = RESTAURANT.menu.filter(item => item.category === category);
     // Capitalize the first letter
     const name = category.charAt(0).toUpperCase() + category.slice(1);
+    
 
     res.render('category.ejs', { menuItems: menuItems, category: name });
 });

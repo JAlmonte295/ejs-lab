@@ -11,7 +11,7 @@
         <ul>
             <% menuItems.forEach(item => { %>
                 <li>
-                    <h3><%= item.name %></h3>
+                    <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
                     <p><strong>Price:</strong> $<%= item.price %></p>
                     <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
                     <p><strong>Details:</strong> <%= item.details %></p>
