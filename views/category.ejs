@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= category %></title>
+    <title><%= category %> - <%= restaurant.name %></title>
 </head>
-<%- include('./partials/nav') %> <!--- include nav.ejs partial --->
 <body>
+    <%- include('./partials/nav') %> <!--- include nav.ejs partial --->
     <h1><%= category %></h1>
         <ul>
             <% menuItems.forEach(item => { %>
                 <li>
                     <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
-                    <p><strong>Price:</strong> $<%= item.price %></p>
+                    <p><strong>Price:</strong> $<%= item.price.toFixed(2) %></p>
                     <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
                     <p><strong>Details:</strong> <%= item.details %></p>
                 </li>

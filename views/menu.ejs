@@ -3,52 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu</title>
+  <title> Menu - <%= restaurant.name %></title>
 </head>
-<%- include('./partials/nav') %> <!--- include nav.ejs partial --->
 <body>
+    <%- include('./partials/nav') %> <!--- include nav.ejs partial --->
   <h1>Full Menu</h1>
-    <h2>Mains</h2>
-    <ul>
-        <% menu.forEach(function(item) { %>
-        <% if (item.category === 'mains') { %>
-            <li>
-                    <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
-                    <p><strong>Price:</strong> $<%= item.price %></p>
-                    <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
-                    <p><strong>Details:</strong> <%= item.details %></p>
-            </li> 
-        <% } %>
-        <% }); %>
-    </ul>
-
-    <h2>Desserts</h2>
-    <ul>
-        <% menu.forEach(function(item) { %>
-        <% if (item.category === 'desserts') { %>
-            <li>
-                    <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
-                    <p><strong>Price:</strong> $<%= item.price %></p>
-                    <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
-                    <p><strong>Details:</strong> <%= item.details %></p>
-            </li>
-        <% } %>
-        <% }); %>
-    </ul>
-
-    <h2>Sides</h2>
-    <ul>
-        <% menu.forEach(function(item) { %>
-        <% if (item.category === 'sides') { %>
-            <li>
-                    <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
-                    <p><strong>Price:</strong> $<%= item.price %></p>
-                    <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
-                    <p><strong>Details:</strong> <%= item.details %></p>
-            </li>
-        <% } %>
-        <% }); %>
-    </ul>
-
+    <p>Explore our delicious offerings below:</p>
+    <% ['mains','desserts','sides'].forEach(cat => { %> 
+    <h2><%= cat[0].toUpperCase() + cat.slice(1) %></h2> 
+    <ul> <% menu.filter(i => i.category === cat).forEach(item => { %> 
+        <li> 
+            <h3><%= item.name %> <%= item.rating === 5 ? '⭐' : '' %></h3>
+            <p><strong>Price:</strong> $<%= item.price.toFixed(2) %></p> 
+            <p><strong>Rating:</strong> <%= item.rating %> / 5</p> 
+            <p><strong>Details:</strong> 
+            <%= item.details %></p> 
+        </li> 
+        <% }) %> 
+    </ul> 
+<% }) %> 
 </body>
 </html>
+
+

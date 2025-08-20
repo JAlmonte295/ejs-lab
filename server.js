@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const allowed = new Set(['mains','desserts','sides']); 
+
 
 const RESTAURANT = {
   name: 'The Green Byte Bistro',
@@ -22,16 +24,16 @@ const RESTAURANT = {
       rating: 3,
       category: 'desserts',
       details: 'A creamy cheesecake bursting with flavor. A mix of berries in every byte.'
-    },
-    { 
+  },
+  {
       id: 3,
       name: 'Recursive Rigatoni',
       price: 17.00,
       rating: 5,
       category: 'mains',
       details: 'A classic rigatoni pasta dish, layered with rich tomato sauce and herbs. You\'ll keep coming back for more.'
-    },
-    { 
+  },
+  { 
       id: 4,
       name: 'Pumpkin Pi Squared',
       price: 3.14,
@@ -47,29 +49,39 @@ const RESTAURANT = {
       category: 'sides',
       details: 'Crispy and lightly seasoned string bean fries, served in a pattern for a fun twist.'
     }
+
   ]
 }
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.locals.restaurant = RESTAURANT;
 
 
 // send restaurant data to home.ejs using locals objects
 app.get('/', (req, res) => {
-  res.render('home.ejs', { restaurant: RESTAURANT });
+  res.render('home.ejs');
 });
 
 app.get('/menu', (req, res) => {
-    res.render('menu.ejs', { menu: RESTAURANT.menu });
+    // The restaurant object is needed for the nav partial
+    res.render('menu.ejs', { menu: RESTAURANT.menu});
 });
 
 app.get('/menu/:category', (req,res) => {
     const category = req.params.category;
+    // Check if the category is valid before proceeding
+    if (!allowed.has(category)) {
+        return res.status(404).send('Category not found');
+    }
     // Filter menu items based on the category
     const menuItems = RESTAURANT.menu.filter(item => item.category === category);
     // Capitalize the first letter
     const name = category.charAt(0).toUpperCase() + category.slice(1);
-    
-
     res.render('category.ejs', { menuItems: menuItems, category: name });
 });
 
-app.listen(3000);
-console.log('Listening on port 3000');
+
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
+});
